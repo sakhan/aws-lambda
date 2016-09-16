@@ -1,0 +1,27 @@
+Policies:
+
+AWSLambdaBasicExecutionRole (managed policy)
+
+Sysco-LambdaEC2ManageTags (inline policy)
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowDescribeAndCreateTags",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CreateTags",
+                "ec2:Describe*",
+                "ec2:StopInstances",
+                "sns:*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}
+
+Trusted Entities:
+The identity provider(s) lambda.amazonaws.com

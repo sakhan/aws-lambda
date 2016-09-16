@@ -1,0 +1,30 @@
+Policies:
+
+AWSLambdaBasicExecutionRole (Managed Policy)
+
+Sysco-LambdaManageRoute53DNSRecords (Inline Policy)
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowUpdateRoute53ResourceRecords",
+            "Effect": "Allow",
+            "Action": [
+                "route53:*",
+                "ec2:Describe*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Resource": "arn:aws:iam::467936237394:role/CrossAccount-UpdateRoute53-PrivateAWSZone"
+        }
+    ]
+}
+
+Trusted Entities
+The identity provider(s) lambda.amazonaws.com

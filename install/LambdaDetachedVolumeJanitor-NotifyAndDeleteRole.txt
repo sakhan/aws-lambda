@@ -1,0 +1,40 @@
+Policies:
+
+AWSLambdaBasicExecutionRole (Managed Policy)
+
+Sysco-LambdaDetachedVolumeNotifyAndDelete (inline)
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeTags",
+                "ec2:DescribeVolumes",
+                "sns:*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DeleteVolumes"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "ec2:ResourceTag/sysco:lambda:DetachedVolumeJanitor:delete-scheduled-on": "*"
+                }
+            }
+        }
+    ]
+}
+
+
+Trusted Entities
+The identity provider(s) lambda.amazonaws.com
